@@ -1,0 +1,216 @@
+<section>
+    <div class="bg-white border-bottom border-light-subtle">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-2">
+                <div class="d-flex justify-content-between align-items-center gap-4">
+                    <a th:href="@{/admin/account-list}" class="btn btn-outline-dark fw-bold border-0" style="font-size: 0.83rem;"><i class="fa-solid fa-users"></i> User Management</a>
+                    <a th:href="@{/admin/product-list}" class="btn btn-dark fw-bold " style="font-size: 0.83rem;"><i class="fa-brands fa-product-hunt"></i> Product Management</a>
+                    <a th:href="@{/admin/category-list}" class="btn btn-outline-dark fw-bold border-0" style="font-size: 0.83rem;"><i class="fa-solid fa-list"></i> Category Management</a>
+                    <a th:href="@{/admin/voucher-list}" class="btn btn-outline-dark fw-bold border-0" style="font-size: 0.83rem;"><i class="fa-solid fa-tags"></i> Voucher Management</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-3" style="min-height: 40rem;">
+        <div class="row">
+            <div class="col-3">
+                <div class="list-group">
+                    <a th:href="@{/admin/product-view/tai-khoan-netflix-1-thang}" class="py-3 px-4 text-secondary list-group-item list-group-item-action"><i class="fa-solid fa-wrench"></i> Product Detail</a>
+                    <a class="py-3 px-4 text-secondary list-group-item list-group-item-action active"><i class="fa-solid fa-store"></i> List Product</a>
+                </div>
+            </div>
+            <div class="col-9 bg-white rounded border">
+                <div class="px-3 py-4">
+                    <h4>Products List</h4>
+                    <hr>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <form action="">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control"  placeholder="Search" id="searchListProductName">
+                                    <label>Search</label>
+                                </div>
+                                <div>
+                                    <div class="form-floating">
+                                        <select class="form-select" aria-label="Floating label select example" id="searchListProductCate">
+                                            <option value="">None</option>
+                                            <option value="Giải trí">Giải trí</option>
+                                            <option value="Làm việc">Làm việc</option>
+                                            <option value="Học tập">Học tập</option>
+                                            <option value="Game Steam">Game Steam</option>
+                                            <option value="Edit Ảnh, Video">Edit Ảnh, Video</option>
+                                            <option value="Window, Office ">Window, Office</option>
+                                            <option value="Google Drive">Google Drive</option>
+                                            <option value="Steam Wallet">Steam Wallet</option>
+                                            <option value="Diệt Virus">Diệt Virus</option>
+                                            <option value="Google Play, iTunes">Google Play, iTunes</option>
+                                        </select>
+                                        <label>Category</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-secondary p-3" type="button" onclick="searchEngine()"><i class="fa-solid fa-filter"></i></button>
+                            </div>
+                        </form>
+
+                        <div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary p-3" data-bs-toggle="modal" data-bs-target="#addProduct">
+                                <i class="fa-solid fa-circle-plus"></i> Create Product
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="addProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Product</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form id="createProductForm">
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control"  placeholder="Product Code" id="createProductCode" required>
+                                                            <label>Product Code</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control"  placeholder="Product Slug" id="createProductSlug" required>
+                                                            <label>Product Slug</label>
+                                                            <div class="invalid-feedback">Slug must be unique.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control"  placeholder="Product Title" id="createProductName" required>
+                                                            <label>Product Title</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="number" class="form-control"  placeholder="Quantity" id="createProductQuantity" required>
+                                                            <label>Quantity</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="number" class="form-control"  placeholder="Price" id="createProductPrice" required>
+                                                            <label>Price</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="number" class="form-control"  placeholder="Discounts" id="createProductDiscounts" required>
+                                                            <label>Discounts</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-floating mb-3">
+                                                            <textarea class="form-control" placeholder="Description" id="createProductDescription" style="height: 100px" required></textarea>
+                                                            <label>Description</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <select class="form-select" aria-label="Floating label select example" id="createProductStatus">
+                                                                <option value="true">True</option>
+                                                                <option value="false">False</option>
+                                                            </select>
+                                                            <label>Status</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-floating mb-3">
+                                                            <select class="form-select" aria-label="Floating label select example" id="createProductCategory">
+                                                                <option value="Giải trí">Giải trí</option>
+                                                                <option value="Làm việc">Làm việc</option>
+                                                                <option value="Học tập">Học tập</option>
+                                                                <option value="Game Steam">Game Steam</option>
+                                                                <option value="Edit Ảnh, Video">Edit Ảnh, Video</option>
+                                                                <option value="Window, Office ">Window, Office </option>
+                                                                <option value="Google Drive">Google Drive</option>
+                                                                <option value="Steam Wallet">Steam Wallet</option>
+                                                                <option value="Diệt Virus">Diệt Virus</option>
+                                                                <option value="Google Play, iTunes">Google Play, iTunes</option>
+                                                            </select>
+                                                            <label>Category</label>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label ms-1">Product Image</label>
+                                                            <input class="form-control" type="file"  id="createProductImage" multiple required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label ms-1">Genres</label>
+                                                        <input class="form-control" list="datalistOptions"  id="createProductGenres" placeholder="Type to search..." required>
+                                                        <datalist id="datalistOptions">
+                                                            <option value="App, Giải trí, Xem phim">
+                                                            <option value="App, Làm việc, Diệt virus">
+                                                            <option value="Action, Adventure, RPG">
+                                                            <option value="windows, Làm việc, microsoft">
+                                                            <option value="Ggplay, itune, chplay">
+                                                        </datalist>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Create Product</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="col-2">Product ID</th>
+                                <th scope="col" class="col-4">Product Name</th>
+                                <th scope="col" class="col-2">Category</th>
+                                <th scope="col" class="col-1">Price</th>
+                                <th scope="col" class="col-1">Stock</th>
+                                <th scope="col" class="col-1">Status</th>
+                                <th scope="col" class="col-1">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="productTable"></tbody>
+                        </table>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p id="showingResult"></p>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item">
+                                        <btn class="page-link" aria-label="Previous" id="prevBtn" onclick="prevPage();">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </btn>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <!-- Các nút pagination sẽ được thêm vào đây -->
+                                    <li class="page-item">
+                                        <btn class="page-link" aria-label="Next" id="nextBtn" onclick="nextPage();">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </btn>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script th:src="@{/js/admin/product/product.js}"></script>

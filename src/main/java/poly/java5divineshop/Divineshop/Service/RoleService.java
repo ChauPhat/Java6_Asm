@@ -1,0 +1,16 @@
+package poly.java5divineshop.Divineshop.Service;
+
+import poly.java5divineshop.Divineshop.Data.Dto.RoleDto;
+import poly.java5divineshop.Divineshop.Data.Entity.RoleE;
+import poly.java5divineshop.Divineshop.Data.Model.RoleM;
+
+import java.sql.SQLException;
+
+public interface RoleService {
+
+    int saveRole(RoleDto roleDto) throws SQLException;
+
+    int deleteRoleByUsername(RoleDto roleDto) throws SQLException;
+
+    RoleM getRoleByUsernameAndRole(String username, String role) throws SQLException;
+}
